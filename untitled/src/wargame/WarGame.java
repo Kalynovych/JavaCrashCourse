@@ -2,13 +2,24 @@ package wargame;
 
 class WarGame {
     public static boolean fight(Warrior w1, Warrior w2) {
-        int round = 0;
-        while (w1.isAlive() && w2.isAlive()) {
-            if (round % 2 == 0) w2.changeHealth(w1.getAttack());
-            else w1.changeHealth(w2.getAttack());
-            round++;
+        Warrior attacker = w1;
+        Warrior defender = w2;
+        while (attacker.isAlive()) {
+            defender.changeHealth(attacker.getAttack());
+            Warrior temp = attacker;
+            attacker = defender;
+            defender = temp;
         }
         return w1.isAlive();
+    }
+
+    public static boolean fight(Army a1, Army a2) {
+        while (a1.isAlive() && a2.isAlive()) {
+            boolean result =  fight(a1.get(0), a2.get(0));
+            if (result) a2.tryDeleteUnits(0);
+            else a1.tryDeleteUnits(0);
+        }
+        return a1.isAlive();
     }
 
 }
