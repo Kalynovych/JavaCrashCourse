@@ -21,9 +21,8 @@ class Warrior {
         return health;
     }
 
-    public int takeDamage(Warrior attacker) {
-        int damage = attacker.getAttack();
-        return takeDamage(damage);
+    public int attack(Warrior defender){
+        return defender.takeDamage(attack);
     }
 
     public int takeDamage(int damage) {
