@@ -21,10 +21,15 @@ class Warrior {
         return health;
     }
 
-    public boolean changeHealth(int damage) {
-        if (damage < 0) return false;
+    public int takeDamage(Warrior attacker) {
+        int damage = attacker.getAttack();
+        return takeDamage(damage);
+    }
+
+    public int takeDamage(int damage) {
+        if (damage < 0) return 0;
         health -= damage;
-        return true;
+        return damage;
     }
 
     public int getAttack() {

@@ -5,7 +5,7 @@ class WarGame {
         Warrior attacker = w1;
         Warrior defender = w2;
         while (attacker.isAlive()) {
-            defender.changeHealth(attacker.getAttack());
+            defender.takeDamage(attacker);
             Warrior temp = attacker;
             attacker = defender;
             defender = temp;
