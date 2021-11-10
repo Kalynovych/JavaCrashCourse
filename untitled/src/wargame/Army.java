@@ -7,6 +7,7 @@ public class Army {
 
     public boolean isAlive()
     {
+        for (int v = 0; v < army.size(); v++) if (!army.get(v).isAlive()) army.remove(v);
         return army.size() > 0;
     }
 
@@ -19,8 +20,9 @@ public class Army {
         }
     }
 
-    public void addUnits(Warrior type) {
-        army.add(type);
+    public void addUnits(Warrior warrior) {
+        army.add(warrior);
+        if (army.size() > 1) army.get(army.size() - 2).setNextUnit(warrior);
     }
 
     public boolean tryDeleteUnits(int index)
