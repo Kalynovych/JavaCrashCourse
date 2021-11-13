@@ -22,7 +22,12 @@ public class Army {
 
     public void addUnits(Warrior warrior) {
         army.add(warrior);
-        if (army.size() > 1) army.get(army.size() - 2).setNextUnit(warrior);
+        if (army.size() > 1)
+        {
+            int preLast = army.size() - 2;
+            army.get(preLast).setNextUnit(warrior);
+            army.get(army.size() - 1).setPrevUnit(army.get(preLast));
+        }
     }
 
     public boolean tryDeleteUnits(int index)
@@ -48,4 +53,3 @@ public class Army {
     }
 
 }
-

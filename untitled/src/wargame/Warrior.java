@@ -3,7 +3,10 @@ package wargame;
 class Warrior {
     protected int health;
     protected int attack;
+    protected final int maxHealth;
     protected Warrior nextUnit = null;
+    protected Warrior prevUnit = null;
+    protected HealEvent heal = new HealEvent();
 
     public Warrior() {
         this(50, 5);
@@ -12,10 +15,14 @@ class Warrior {
     protected Warrior(int health, int attack) {
         this.health = health;
         this.attack = attack;
+        this.maxHealth = health;
     }
 
     public boolean isAlive() {
-        if (nextUnit != null && !nextUnit.isAlive()) nextUnit = nextUnit.nextUnit;
+        if (nextUnit != null && !nextUnit.isAlive()){
+            nextUnit = nextUnit.nextUnit;
+            nextUnit.prevUnit = this;
+        }
         return health > 0;
     }
 
@@ -24,6 +31,7 @@ class Warrior {
     }
 
     public int attack(Warrior defender){
+        heal.onHeal(this);
         return defender.takeDamage(attack);
     }
 
@@ -39,6 +47,14 @@ class Warrior {
 
     public Warrior getNextUnit(){
         return nextUnit;
+    }
+
+    public void setPrevUnit(Warrior unit){
+        prevUnit = unit;
+    }
+
+    public Warrior getPrevUnit(){
+        return prevUnit;
     }
 
     public int getAttack() {
