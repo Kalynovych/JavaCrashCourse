@@ -30,6 +30,10 @@ public class Army {
         }
     }
 
+    public void addStraightUnit(Warrior warrior) {
+        army.add(warrior);
+    }
+
     public boolean tryDeleteUnits(int index)
     {
         try {
@@ -50,6 +54,14 @@ public class Army {
         catch (IndexOutOfBoundsException ex) {
             return false;
         }
+    }
+
+    public void deleteDeadUnits(){
+        army.removeIf(u -> !u.isAlive());
+    }
+
+    public int armySize(){
+        return army.size();
     }
 
 }

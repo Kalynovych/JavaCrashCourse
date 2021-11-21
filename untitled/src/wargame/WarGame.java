@@ -22,4 +22,14 @@ class WarGame {
         return a1.isAlive();
     }
 
+    public static boolean straightFight(Army a1, Army a2){
+        while (a1.isAlive() && a2.isAlive()) {
+            int min = Math.min(a1.armySize(), a2.armySize());
+            for (int i = 0; i < min; i++) fight(a1.get(i), a2.get(i));
+            a1.deleteDeadUnits();
+            a2.deleteDeadUnits();
+        }
+        return a1.isAlive();
+    }
+
 }
