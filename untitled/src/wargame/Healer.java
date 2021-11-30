@@ -16,6 +16,20 @@ public class Healer extends Warrior implements HealEventListener {
         }
         return 0;
     }
+    @Override
+    public void equip_weapon(Weapon weapon)
+    {
+        super.equip_weapon(weapon);
+        healRate += weapon.healPower;
+        checkParameters();
+    }
+
+    @Override
+    protected void checkParameters()
+    {
+        if (healRate < 0) healRate = 0;
+        super.checkParameters();
+    }
 
     @Override
     public void setPrevUnit(Warrior unit){

@@ -56,6 +56,11 @@ public class Army {
         }
     }
 
+    public void equipUnit(int unit, Weapon weapon)
+    {
+        army.get(unit).equip_weapon(weapon);
+    }
+
     public void deleteDeadUnits(){
         army.removeIf(u -> !u.isAlive());
     }

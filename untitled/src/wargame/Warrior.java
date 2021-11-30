@@ -3,7 +3,7 @@ package wargame;
 class Warrior {
     protected int health;
     protected int attack;
-    protected final int maxHealth;
+    protected int maxHealth;
     protected Warrior nextUnit = null;
     protected Warrior prevUnit = null;
     protected HealEvent heal = new HealEvent();
@@ -39,6 +39,21 @@ class Warrior {
         if (damage < 0) return 0;
         health -= damage;
         return damage;
+    }
+
+    public void equip_weapon(Weapon weapon)
+    {
+        health += weapon.health;
+        maxHealth += weapon.health;
+        attack += weapon.attack;
+        checkParameters();
+    }
+
+    protected void checkParameters()
+    {
+        if (health < 0) health = 0;
+        if (maxHealth < 0) maxHealth = 0;
+        if (attack < 0) attack = 0;
     }
 
     public void setNextUnit(Warrior unit){
